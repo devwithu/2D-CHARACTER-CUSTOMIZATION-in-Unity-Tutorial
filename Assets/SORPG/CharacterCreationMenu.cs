@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class CharacterCreationMenu : MonoBehaviour
 {
-    [FormerlySerializedAs("OutfitChangers")] public List<OutfitChanger> outfitChangers = new List<OutfitChanger>();
+    public GameObject character;
+    public List<OutfitChanger> outfitChangers = new List<OutfitChanger>();
     
     public void RandomizeCharactoer()
     {
@@ -13,5 +16,11 @@ public class CharacterCreationMenu : MonoBehaviour
         {
             changer.Randomize();
         }    
+    }
+
+    public void Submit()
+    {
+        PrefabUtility.SaveAsPrefabAsset(character, "Assets/SORPG/Player.prefab");
+        SceneManager.LoadScene(1);
     }
 }
